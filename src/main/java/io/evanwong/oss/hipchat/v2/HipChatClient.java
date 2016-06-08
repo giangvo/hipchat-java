@@ -2,7 +2,17 @@ package io.evanwong.oss.hipchat.v2;
 
 import io.evanwong.oss.hipchat.v2.emoticons.GetAllEmoticonsRequestBuilder;
 import io.evanwong.oss.hipchat.v2.emoticons.GetEmoticonRequestBuilder;
-import io.evanwong.oss.hipchat.v2.rooms.*;
+import io.evanwong.oss.hipchat.v2.rooms.AddRoomMemberRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.CreateRoomRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.DeleteRoomRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.GetAllRoomsRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.GetRoomRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.RemoveRoomMemberRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.SendRoomMessageRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.SendRoomNotificationRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.SetTopicRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.UpdateRoomRequestBuilder;
+import io.evanwong.oss.hipchat.v2.rooms.ViewRoomHistoryRequestBuilder;
 import io.evanwong.oss.hipchat.v2.users.CreateUserRequestBuilder;
 import io.evanwong.oss.hipchat.v2.users.DeleteUserRequestBuilder;
 import io.evanwong.oss.hipchat.v2.users.GetAllUsersRequestBuilder;
@@ -190,6 +200,10 @@ public class HipChatClient {
 
     public UpdateRoomRequestBuilder prepareUpdateRoomRequestBuilder(String roomIdOrName, String accessToken) {
         return new UpdateRoomRequestBuilder(roomIdOrName, accessToken, baseUrl, httpClient, executorService);
+    }
+
+    public ViewRoomHistoryRequestBuilder prepareRoomHistoryRequestBuilder(String roomIdOrName, String accessToken) {
+        return new ViewRoomHistoryRequestBuilder(roomIdOrName, accessToken, baseUrl, httpClient, executorService);
     }
 
     public CreateUserRequestBuilder prepareCreateUserRequestBuilder(String username, String password, String emailaddress, String accessToken)
