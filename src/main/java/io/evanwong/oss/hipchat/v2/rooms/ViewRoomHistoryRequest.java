@@ -11,12 +11,16 @@ public class ViewRoomHistoryRequest extends GetRequest<MessageItems> {
     private final String roomIdOrName;
     private Integer startIndex;
     private Integer maxResults;
+    private String date;
+    private String endDate;
 
-    public ViewRoomHistoryRequest(Integer startIndex, Integer maxResults, String roomIdOrName, String accessToken, String baseUrl, HttpClient httpClient, ExecutorService executorService) {
+    public ViewRoomHistoryRequest(Integer startIndex, Integer maxResults, String date, String endDate, String roomIdOrName, String accessToken, String baseUrl, HttpClient httpClient, ExecutorService executorService) {
         super(accessToken, baseUrl, httpClient, executorService);
         this.roomIdOrName = roomIdOrName;
         this.startIndex = startIndex;
         this.maxResults = maxResults;
+        this.date = date;
+        this.endDate = endDate;
     }
     @Override
     protected Map<String, Object> toQueryMap() {
@@ -26,8 +30,17 @@ public class ViewRoomHistoryRequest extends GetRequest<MessageItems> {
         if (startIndex != null) {
             params.put("start-index", startIndex);
         }
+
         if (maxResults != null) {
             params.put("max-results", maxResults);
+        }
+
+        if (date != null) {
+            params.put("date", maxResults);
+        }
+
+        if (endDate != null) {
+            params.put("end-date", maxResults);
         }
 
         return params;
