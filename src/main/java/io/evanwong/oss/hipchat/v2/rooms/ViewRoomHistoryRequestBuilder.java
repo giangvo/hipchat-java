@@ -11,6 +11,7 @@ public class ViewRoomHistoryRequestBuilder extends RequestBuilder<ViewRoomHistor
     private Integer maxResults;
     private String date;
     private String endDate;
+    private boolean reverse = false;
 
     public ViewRoomHistoryRequestBuilder(String roomIdOrName, String accessToken, String baseUrl, HttpClient httpClient, ExecutorService executorService) {
         super(accessToken, baseUrl, httpClient, executorService);
@@ -40,9 +41,14 @@ public class ViewRoomHistoryRequestBuilder extends RequestBuilder<ViewRoomHistor
         return this;
     }
 
+    public ViewRoomHistoryRequestBuilder setReverse(boolean reverse) {
+        this.reverse = reverse;
+        return this;
+    }
+
     @Override
     public ViewRoomHistoryRequest build() {
-        return new ViewRoomHistoryRequest(startIndex, maxResults, date, endDate, roomIdOrName, accessToken, baseUrl, httpClient, executorService);
+        return new ViewRoomHistoryRequest(startIndex, maxResults, date, endDate, reverse, roomIdOrName, accessToken, baseUrl, httpClient, executorService);
     }
 
 }

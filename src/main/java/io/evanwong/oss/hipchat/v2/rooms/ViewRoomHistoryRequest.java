@@ -13,19 +13,22 @@ public class ViewRoomHistoryRequest extends GetRequest<MessageItems> {
     private Integer maxResults;
     private String date;
     private String endDate;
+    private boolean reverse = false;
 
-    public ViewRoomHistoryRequest(Integer startIndex, Integer maxResults, String date, String endDate, String roomIdOrName, String accessToken, String baseUrl, HttpClient httpClient, ExecutorService executorService) {
+    public ViewRoomHistoryRequest(Integer startIndex, Integer maxResults, String date, String endDate, boolean reverse, String roomIdOrName, String accessToken, String baseUrl, HttpClient httpClient, ExecutorService executorService) {
         super(accessToken, baseUrl, httpClient, executorService);
         this.roomIdOrName = roomIdOrName;
         this.startIndex = startIndex;
         this.maxResults = maxResults;
         this.date = date;
         this.endDate = endDate;
+        this.reverse = reverse;
     }
+
     @Override
     protected Map<String, Object> toQueryMap() {
         HashMap<String, Object> params = new HashMap<>();
-        params.put("reverse", "false");
+        params.put("reverse", String.valueOf(reverse));
 
         if (startIndex != null) {
             params.put("start-index", startIndex);
@@ -36,11 +39,11 @@ public class ViewRoomHistoryRequest extends GetRequest<MessageItems> {
         }
 
         if (date != null) {
-            params.put("date", maxResults);
+            params.put("date", date);
         }
 
         if (endDate != null) {
-            params.put("end-date", maxResults);
+            params.put("end-date", endDate);
         }
 
         return params;
